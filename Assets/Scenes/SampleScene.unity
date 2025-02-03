@@ -7005,6 +7005,84 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1179597525487260167, guid: 660c88dff2628ff4d8a7b6664a4f2c88, type: 3}
   m_PrefabInstance: {fileID: 1206853220}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1760225121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1760225123}
+  - component: {fileID: 1760225122}
+  - component: {fileID: 1760225124}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1760225122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760225121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0968b297f560afd4bbfe33b7dce33186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPoint: {fileID: 475229433}
+  path:
+  - {fileID: 1932782729}
+  - {fileID: 1809448664}
+  - {fileID: 1121871966}
+  - {fileID: 711507191}
+  - {fileID: 828949159}
+  - {fileID: 1080895602}
+  - {fileID: 1717688314}
+  - {fileID: 50529039}
+  - {fileID: 1648522957}
+  - {fileID: 396767646}
+  - {fileID: 178123589}
+  - {fileID: 925552964}
+  - {fileID: 1140251890}
+--- !u!4 &1760225123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760225121}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.53306, y: 0.65771437, z: 0.027299628}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1760225124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760225121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117e042cd06e79f4a9f9bd4ba39c4843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 8125279697014507906, guid: 6b73abe432ec4374b81f5a52e4ad4d6f, type: 3}
+  baseEnemies: 8
+  enemiesPerSecond: 0.5
+  timeBetweenWaves: 5
+  diffScalingFactor: 0.75
 --- !u!1001 &1764977353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8672,3 +8750,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1117711924}
   - {fileID: 1372163584}
+  - {fileID: 1760225123}
