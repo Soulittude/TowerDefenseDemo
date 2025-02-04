@@ -32,7 +32,14 @@ public class Plot : MonoBehaviour
         if (tower != null)
             return;
 
-        GameObject selectedTower = BuildManager.main.GetSelectedTower();
-        tower = Instantiate(selectedTower, transform.position, Quaternion.identity);
+        Tower selectedTower = BuildManager.main.GetSelectedTower();
+
+        if (selectedTower.cost > LevelManager.main.budget)
+        {
+            return;
+        }
+
+        LevelManager.main.SpendBudget(selectedTower.cost);
+        tower = Instantiate(selectedTower.prefab, transform.position, Quaternion.identity);
     }
 }

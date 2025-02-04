@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
         budget += amount;
     }
 
-    public bool SpendCurrency(int amount)
+    public bool SpendBudget(int amount)
     {
         if (amount < budget)
         {

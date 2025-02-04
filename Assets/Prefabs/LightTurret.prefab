@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 774828721120661624}
   - component: {fileID: 3023525929383168381}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: LightTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
     m_Bits: 64
   bulletPrefab: {fileID: 1768929981536945306, guid: 01da97afd6ed1e7428ebea55e218dccc, type: 3}
   firingPoint: {fileID: 4489755949004142206}
-  targetingRange: 3.5
+  targetingRange: 2
   rotationSpeed: 240
   bulletPerSecond: 1
 --- !u!1 &8092253344130494970
