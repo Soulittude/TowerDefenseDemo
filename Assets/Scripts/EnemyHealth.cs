@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private float healthPoint = 4;
+    [SerializeField] private int destroyPrize = 32;
 
     private bool isDestroyed = false;
 
@@ -16,8 +17,9 @@ public class EnemyHealth : MonoBehaviour
         if (healthPoint <= 0 && !isDestroyed)
         {
             EnemySpawner.onEnemyDestroy.Invoke();
-            Destroy(gameObject);
+            LevelManager.main.IncreaseBudget(destroyPrize);
             isDestroyed = true;
+            Destroy(gameObject);
         }
     }
 }

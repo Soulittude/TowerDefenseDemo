@@ -8,9 +8,36 @@ public class LevelManager : MonoBehaviour
 
     public Transform startPoint;
     public Transform[] path;
+    public int budget;
 
-    private void Awake() {
+    private void Awake()
+    {
         main = this;
     }
-    
+
+    private void Start()
+    {
+        budget = 100;
+    }
+
+    public void IncreaseBudget(int amount)
+    {
+        budget += amount;
+    }
+
+    public bool SpendCurrency(int amount)
+    {
+        if (amount < budget)
+        {
+            //buy
+            budget -= amount;
+            return true;
+        }
+        else
+        {
+            Debug.Log("Not enough money.");
+            return false;
+        }
+    }
+
 }
