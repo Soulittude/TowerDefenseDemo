@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -14,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float enemiesPerSecond = 0.5f;
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private float diffScalingMultiplier = 0.75f;
+    [SerializeField] private float enemiesPerSecondCap = 15f;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
@@ -21,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     private float timeSinceLastSpawn;
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
+    private float eps;
     private bool isSpawning = false;
 
     private void Awake()
@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
         timeSinceLastSpawn += Time.deltaTime;
 
-        if (timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0)
+        if (timeSinceLastSpawn >= (1f / eps) && enemiesLeftToSpawn > 0)
         {
             SpawnEnemy();
 
@@ -62,16 +62,31 @@ public class EnemySpawner : MonoBehaviour
 
         isSpawning = true;
         enemiesLeftToSpawn = EnemiesPerWave();
+        eps = EnemiesPerSecond();
     }
     private void SpawnEnemy()
     {
-        GameObject prefabToSpawn = enemyPrefabs[0];
+        int index = Random.Range(0, enemyPrefabs.Length);
+        int enemyIndex = 0;
+
+        if (index <= 0.8)
+            enemyIndex = 0;
+        else
+            enemyIndex = 1;
+
+        GameObject prefabToSpawn = enemyPrefabs[enemyIndex];
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
 
     private int EnemiesPerWave()
     {
         return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, diffScalingMultiplier));
+    }
+
+    private float EnemiesPerSecond()
+    {
+        return Mathf.Clamp(enemiesPerSecond
+        * Mathf.Pow(currentWave, diffScalingMultiplier), 0f, enemiesPerSecondCap);
     }
 
     private void EnemyDestroyed()
