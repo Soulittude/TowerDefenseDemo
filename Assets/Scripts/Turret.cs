@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using Unity.Mathematics;
+using UnityEngine.UI;
 
 public class Turret : MonoBehaviour
 {
@@ -9,15 +10,29 @@ public class Turret : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
 
     [Header("Attributes")]
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private float rotationSpeed = 4f;
     [SerializeField] private float bulletPerSecond = 1f;
+    [SerializeField] private int baseUpgradeCost = 100;
 
+    private float bulletPerSecondBase;
+    private float targetingRangeBase;
 
     private Transform target;
     private float timeUntilFire;
+
+    private int level = 1;
+
+    private void Start() {
+        bulletPerSecondBase = bulletPerSecond;
+        targetingRangeBase = targetingRange;
+
+        upgradeButton.onClick.AddListener(Upgrade);
+    }
 
     private void Update()
     {
@@ -86,5 +101,45 @@ public class Turret : MonoBehaviour
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
 
         bulletScript.SetTarget(target);
+    }
+
+    public void OpenUpgradeUI()
+    {
+        upgradeUI.SetActive(true);
+    }
+
+    public void CloseUpgradeUI()
+    {
+        upgradeUI.SetActive(false);
+        UIManager.main.SetHoveringState(false);
+    }
+
+    public void Upgrade()
+    {
+        if(baseUpgradeCost>LevelManager.main.budget)
+            return;
+
+        LevelManager.main.SpendBudget(CalculateUpgradeCost());
+
+        level++;
+        bulletPerSecond = CalculateNewBPS();
+        targetingRange = CalculateNewRange();
+
+        CloseUpgradeUI();
+    }
+
+    private int CalculateUpgradeCost()
+    {
+        return Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(level, 0.8f));
+    }
+
+    private float CalculateNewBPS()
+    {
+        return bulletPerSecondBase * Mathf.Pow(level, 0.6f);
+    }
+
+    private float CalculateNewRange()
+    {
+        return targetingRangeBase * Mathf.Pow(level, 0.4f);
     }
 }
